@@ -1,7 +1,9 @@
+CC = gcc
 CFLAGS = -std=c90
 
 main: *.c
-	gcc $(CFLAGS) main.c -o $@
+	$(CC) $(CFLAGS) main.c -o $@
 
 run: main
 	./$^
+	rm main
