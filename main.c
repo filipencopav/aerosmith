@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stddef.h>
-#include <errno.h>
 
 int accumulator;
 int mailboxes[100] = { 0 };
@@ -55,7 +54,7 @@ int main() {
 	FILE *in_file = fopen("instr.txt", "r");
 	if (in_file == NULL) {
 		puts("[ERROR READING INSTRUCTION FILE]");
-		return errno;
+		return ferror(in_file);
 	}
 	read_instructions(in_file);
 	while (mailboxes[program_counter] != 0)
