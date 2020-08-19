@@ -1,0 +1,12 @@
+void cob(size_t, Aerosmith*);
+void add(size_t, Aerosmith*);
+void sub(size_t, Aerosmith*);
+void sta(size_t, Aerosmith*);
+void lda(size_t, Aerosmith*);
+void bra(size_t, Aerosmith*);
+void brz(size_t, Aerosmith*);
+void brp(size_t, Aerosmith*);
+void inp(size_t, Aerosmith*);
+void out(size_t, Aerosmith*);
+void io(size_t, Aerosmith*);
+void empty(size_t, Aerosmith*);

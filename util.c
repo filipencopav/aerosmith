@@ -1,6 +1,6 @@
-/* utility functions */
+#include "util.h"
 
-int power(int base, unsigned n) {
+static int power(int base, unsigned n) {
 	if (n <= 0)
 		return 1;
 	int i = 1;
@@ -18,7 +18,7 @@ int digit_at(int num, int pos) {
 }
 
 /* inclusive at both ends, counts from 1 */
-int num_on_pos(int num, int from, int until) {
+int digits_at(int num, int from, int until) {
 	int i;
 	int res = 0;
 	for (i = from; i >= until; i--) {

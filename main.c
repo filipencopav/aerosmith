@@ -1,64 +1,41 @@
 #include <stdio.h>
 #include <stddef.h>
+#include "aero.h"
+#include "util.h"
+#include "instr.h"
+#include "init.h"
 
-int accumulator;
-int mailboxes[100] = { 0 };
-int program_counter = 0;
+void (*instructions[10])(size_t, Aerosmith *) = {
+	cob,
+	add,
+	sub,
+	empty,
+	empty,
+	lda,
+	bra,
+	brz,
+	brp,
+	io,
+};
 
-#include "util.c"
-#include "instr.c"
-#include "init.c"
-
-int execute(int instr) {
-	size_t addr = num_on_pos(instr, 2, 1);
-	program_counter++;
-	switch (digit_at(instr, 2)) {
-		default:
-			fprintf(stderr, "[INVALID INSTRUCTION]: %d", instr);
-			return 1;
-		case 0:
-			fprintf(stdout, "[COFFEE BREAK]\n");
-			return 1;
-		case 1:
-			add(addr);
-			break;
-		case 2:
-			sub(addr);
-			break;
-		case 3:
-			sta(addr);
-			break;
-		case 5:
-			lda(addr);
-			break;
-		case 6:
-			bra(addr);
-			break;
-		case 7:
-			brz(addr);
-			break;
-		case 8:
-			brp(addr);
-			break;
-		case 9:
-			if (instr == 901)
-				inp();
-			else if (instr == 902)
-				out();
-			break;
-	}
-	return 0;
+void run(Aerosmith *aero) {
+	size_t addr = digits_at(aero->mailboxes[aero->program_counter], 2, 1);
+	size_t instr = digit_at(aero->mailboxes[aero->program_counter], 3);
+	aero->program_counter++;
+	instructions[instr](addr, aero);
 }
 
 int main() {
+	Aerosmith aero;
+	aero.program_counter = 0;
+	aero.accumulator = 0;
 	FILE *in_file = fopen("instr.txt", "r");
 	if (in_file == NULL) {
 		puts("[ERROR READING INSTRUCTION FILE]");
 		return ferror(in_file);
 	}
-	read_instructions(in_file);
-	while (mailboxes[program_counter] != 0)
-		execute(mailboxes[program_counter]);
-	fprintf(stdout, "[COB]\n");
+	read_instructions(in_file, aero.mailboxes, 100);
+	while (1)
+		run(&aero);
 	return 0;
 }
