@@ -7,6 +7,8 @@ Default program in `instr.txt` is a fibonacci calculator
 
 ---
 Dependencies:
+ - git (optional)
+ - make (optional)
  - any c compiler
 
 ---
@@ -16,6 +18,15 @@ To run:
 git clone https://github.com/theamazingwaffle/aerosmith
 cd aerosmith
 make run
+```
+
+Without make:
+
+```
+git clone https://github.com/theamazingwaffle/aerosmith
+cd aerosmith
+gcc -std=c90 main.c -o aerosmith
+./aerosmith
 ```
 
 ---
