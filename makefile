@@ -1,4 +1,3 @@
-CC = gcc
 CFLAGS = -std=c90 -g
 
 aerosmith: *.c

@@ -26,40 +26,35 @@ void cob(size_t addr, Aerosmith *aero) {
 }
 
 void add(size_t addr, Aerosmith *aero) {
-	printf("adding %d to accumulator\n", aero->mailboxes[addr]);
 	aero->accumulator += aero->mailboxes[addr];
 }
 
 void sub(size_t addr, Aerosmith *aero) {
-	printf("substracting %d from accumulator\n", aero->mailboxes[addr]);
 	aero->accumulator -= aero->mailboxes[addr];
 }
 
 void sta(size_t addr, Aerosmith *aero) {
-	printf("storing %d in mailbox %ld\n", aero->accumulator, addr);
 	aero->mailboxes[addr] = aero->accumulator;
 }
 
 void lda(size_t addr, Aerosmith *aero) {
-	printf("loading %d from mailbox %ld into accumulator\n", aero->mailboxes[addr], addr);
 	aero->accumulator = aero->mailboxes[addr];
 }
 
 void bra(size_t addr, Aerosmith *aero) {
-	printf("setting program_counter to %ld\n", addr);
 	aero->program_counter = addr;
 }
 
 void brz(size_t addr, Aerosmith *aero) {
-	if (aero->accumulator == 0)
-		printf("setting program_counter to %ld\n", addr);
+	if (aero->accumulator == 0) {
 		aero->program_counter = addr;
+	}
 }
 
 void brp(size_t addr, Aerosmith *aero) {
-	if (aero->accumulator >= 0)
-		printf("setting program_counter to %ld\n", addr);
+	if (aero->accumulator >= 0) {
 		aero->program_counter = addr;
+	}
 }
 
 void inp(size_t addr, Aerosmith *aero) {

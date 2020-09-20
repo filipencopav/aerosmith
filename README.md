@@ -1,14 +1,13 @@
 # aerosmith
 Little man computer implemented in C.  
 Idea from a random /g/ programming challenges roll.
-Made it in one evening.
+
+---
+Default program in `instr.txt` is a fibonacci calculator
 
 ---
 Dependencies:
  - any c compiler
-
-The default compiler is gcc. Change it in the makefile, if
-yours is different (protip: it isn't).
 
 ---
 To run:
