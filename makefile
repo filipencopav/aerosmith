@@ -1,9 +1,9 @@
 CC = gcc
-CFLAGS = -std=c90
+CFLAGS = -std=c90 -g
 
-main: *.c
-	$(CC) $(CFLAGS) main.c -o $@
+aerosmith: *.c
+	$(CC) $(CFLAGS) $^ -o $@
 
-run: main
+run: aerosmith
 	./$^
-	rm main
+	rm $^
