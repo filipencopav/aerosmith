@@ -1,7 +1,9 @@
+/* vim: set tw=4 sw=4 : */
 #include <stdio.h>
 #include <stddef.h>
 #include <stdlib.h>
 
+#include "parser.h"
 
 typedef struct Aerosmith {
 	int accumulator;
