@@ -1,3 +1,5 @@
+;; the comments are the mailbox numbers
+
 LDA 10 ; 0
 INP    ; 1
 ADD 11 ; 2
