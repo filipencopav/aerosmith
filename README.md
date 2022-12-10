@@ -30,9 +30,12 @@ gcc -std=c90 main.c -o aerosmith
 ```
 
 ---
-Little man computer programming language [documentation][1].  
-Source code is numbers and goes into instructions.txt
-When finished just do `make run`. Make sure to be in the aerosmth
-directory though.
+
+Little man computer programming language [documentation][1]. The source code is
+a mix of mnemonic codes and actual addresses (ex: STA 123). It goes into
+`instr.txt`. Unlike in the wikipedia version, `DAT` receives an argument, which
+is the value stored in the given mailbox. Each line that has code is a mailbox
+itself. When finished writing your program, execute `make run` and see the
+output. Make sure to be in aerosmith's directory.
 
 [1]: https://en.wikipedia.org/wiki/Little_man_computer
