@@ -1,6 +1,6 @@
-#include "parser.h"
-#include "tokens.h"
-#include "panic.h"
+#include "src/includes/parser.h"
+#include "src/includes/tokens.h"
+#include "src/includes/panic.h"
 
 void test_into_nullterm() {
 	char line[] = "The quick brown fox jumps over the lazy dog";
@@ -50,7 +50,7 @@ void test_parse_int() {
 }
 
 void test_parse_line() {
-	char *line = "ADD ; this adds the mailbox @102 to the accumulator";
+	char *line = "ADD 102; this adds the mailbox @102 to the accumulator";
 	String str = str_new(line);
 	Tokens tok = tokenize(&str);
 	int instr = parse_instr(&tok);
@@ -59,11 +59,11 @@ void test_parse_line() {
 }
 
 int main() {
-//	test_into_nullterm();
-//	test_cutoff();
-//	test_tokenize();
-//	test_match_instr();
-//	test_parse_int();
-//	test_parse_line();
+	test_into_nullterm();
+	test_cutoff();
+	test_tokenize();
+	test_match_instr();
+	test_parse_int();
+	test_parse_line();
 	return 0;
 }

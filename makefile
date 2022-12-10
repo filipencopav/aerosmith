@@ -1,13 +1,13 @@
 CFLAGS = -std=c99 -g -pedantic
 
-aerosmith: main.c parser.c panic.c tokens.c dynstring.c
+aerosmith: main.c src/*.c
 	$(CC) $(CFLAGS) $^ -o $@
 
 run: aerosmith
 	./$^
 	rm $^
 
-test: test.c parser.c panic.c tokens.c dynstring.c
+test: test.c src/*.c
 	$(CC) $(CFLAGS) $^ -o $@
 
 run-test: test
