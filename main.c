@@ -1,4 +1,3 @@
-/* vim: set tw=4 sw=4 : */
 #include <stdio.h>
 #include <stddef.h>
 #include <stdlib.h>
@@ -10,17 +9,6 @@ typedef struct Aerosmith {
 	int program_counter;
 	int mailboxes[100];
 } Aerosmith;
-
-static int power(int base, unsigned n) {
-	if (n == 0)
-		return 0;
-	int i = 1;
-	int res = base;
-	for (; i < n; i++) {
-		res *= base;
-	}
-	return res;
-}
 
 void cob(size_t addr, Aerosmith *aero) {
 	puts("[COB]");
@@ -71,18 +59,34 @@ void out(size_t addr, Aerosmith *aero) {
 void io(size_t addr, Aerosmith *aero) {
 	if (addr == 2) {
 		inp(addr, aero);
-    } else if (addr == 1) {
+	} else if (addr == 1) {
 		out(addr, aero);
-    }
+	}
 }
 
 void empty(size_t addr, Aerosmith *aero) {}
 
 void read_instructions(FILE *in_file, int mailboxes[], size_t mailboxes_len) {
-	size_t i;
-	for (i = 0; i < mailboxes_len; i++)
-		if (fscanf(in_file, " %d ", mailboxes + i) == EOF)
-			break;
+	size_t i = 0;
+//	for (; i < mailboxes_len; i++)
+//		if (fscanf(in_file, " %d ", mailboxes + i) == EOF)
+//			break;
+
+	while(!feof(in_file)) {
+		String line = str_new("");
+		Tokens tokens;
+		for (char c = fgetc(in_file); c != '\n' && !feof(in_file); c = fgetc(in_file)) {
+			str_push(&line, c);
+		}
+		tokens = tokenize(&line);
+		if (tokens.len != 0) {
+			int instr = parse_instr(&tokens);
+			mailboxes[i] = instr;
+			i++;
+		}
+		tok_free(&tokens);
+		str_free(&line);
+	}
 }
 
 void (*instructions[10])(size_t, Aerosmith *) = {

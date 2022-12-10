@@ -1,8 +1,18 @@
-CFLAGS = -std=c90 -g
+CFLAGS = -std=c99 -g -pedantic
 
-aerosmith: *.c
+aerosmith: main.c parser.c panic.c tokens.c dynstring.c
 	$(CC) $(CFLAGS) $^ -o $@
 
 run: aerosmith
 	./$^
+	rm $^
+
+test: test.c parser.c panic.c tokens.c dynstring.c
+	$(CC) $(CFLAGS) $^ -o $@
+
+run-test: test
+	./$^
+	rm $^
+
+clean: aerosmith
 	rm $^
