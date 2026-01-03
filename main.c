@@ -67,19 +67,23 @@ void io(size_t addr, Aerosmith *aero) {
 void empty(size_t addr, Aerosmith *aero) {}
 
 void read_instructions(FILE *in_file, int mailboxes[], size_t mailboxes_len) {
+	// instruction counter
 	size_t i = 0;
 //	for (; i < mailboxes_len; i++)
 //		if (fscanf(in_file, " %d ", mailboxes + i) == EOF)
 //			break;
 
 	while(!feof(in_file)) {
-		String line = str_new("");
-		Tokens tokens;
+		String line = str_new(""); // reads line into string
+		Tokens tokens; // dynamic array of strings
+		// read char, push it to line while it's not a newline or hit the EOL
 		for (char c = fgetc(in_file); c != '\n' && !feof(in_file); c = fgetc(in_file)) {
 			str_push(&line, c);
 		}
+		// split line into array of tokens
 		tokens = tokenize(&line);
 		if (tokens.len != 0) {
+			// panics if this line has > 2 tokens
 			int instr = parse_instr(&tokens);
 			mailboxes[i] = instr;
 			i++;
