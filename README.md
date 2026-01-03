@@ -1,29 +1,39 @@
-# aerosmith
-Little man computer implemented in C.  
-Idea from a random /g/ programming challenges roll.
+# aerosmith – Little Man Computer in C
+
+A minimal implementation of the [Little Man Computer](https://en.wikipedia.org/wiki/Little_man_computer) (LMC), written in ANSI C90.
+
+The LMC is a simplified model of a von Neumann architecture computer, used for teaching assembly and machine-level programming concepts.
 
 ---
-Default program in `instr.txt` is a fibonacci calculator
+
+## 📦 Features
+
+- Supports standard LMC instruction set (ADD, SUB, STA, LDA, BRA, BRZ, BRP, INP, OUT, COB)
+- Custom extension: `DAT` accepts a value directly (e.g., `DAT 42`)
+- Programs are read from `instr.txt`
+- Default program calculates Fibonacci numbers
 
 ---
-Dependencies:
- - git (optional)
- - make (optional)
- - any c compiler
+
+## 💻 Requirements
+
+- Any C compiler (GCC, Clang, etc.)
+- Optional: `git` and `make` for convenience
 
 ---
-To run:
 
-```
-git clone https://github.com/theamazingwaffle/aerosmith
+## ▶️ How to Run
+
+Using `make`:
+```bash
+git clone https://github.com/theamazingwaffle/aerosmith 
 cd aerosmith
 make run
 ```
 
-Without make:
-
-```
-git clone https://github.com/theamazingwaffle/aerosmith
+Without `make`:
+```bash
+git clone https://github.com/theamazingwaffle/aerosmith 
 cd aerosmith
 gcc -std=c90 main.c -o aerosmith
 ./aerosmith
@@ -31,11 +41,51 @@ gcc -std=c90 main.c -o aerosmith
 
 ---
 
-Little man computer programming language [documentation][1]. The source code is
-a mix of mnemonic codes and actual addresses (ex: STA 123). It goes into
-`instr.txt`. Unlike in the wikipedia version, `DAT` receives an argument, which
-is the value stored in the given mailbox. Each line that has code is a mailbox
-itself. When finished writing your program, execute `make run` and see the
-output. Make sure to be in aerosmith's directory.
+## 📄 Writing Programs
 
-[1]: https://en.wikipedia.org/wiki/Little_man_computer
+Each line in `instr.txt` represents one "mailbox" in the LMC.
+
+Example:
+```
+INP
+STA 6
+LDA 6
+OUT
+COB
+```
+
+This simple program reads input, stores it in mailbox number 6, loads and outputs it, then halts.
+
+For more information about LMC programming, see the [Wikipedia page](https://en.wikipedia.org/wiki/Little_man_computer).
+
+---
+
+## 🛠️ Implementation Notes
+
+- Memory: 100 mailboxes (0–99)
+- Accumulator: holds current arithmetic result
+- Program Counter: tracks next instruction address
+- Input/Output: via stdin/stdout
+
+Self-modifying code is supported — treat data as instructions at your own risk!
+
+---
+
+## 📝 Roadmap
+
+- Add support for labels and symbolic addressing
+- Implement debugging output (register/memory dump)
+- Add unit tests
+- Create a GUI interface or web-based emulator
+
+---
+
+## 🤝 Contributing
+
+PRs welcome! Please ensure changes are well-documented and tested.
+
+---
+
+## 📜 License
+
+BSD 3 Clause License
